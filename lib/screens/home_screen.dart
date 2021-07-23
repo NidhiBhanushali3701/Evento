@@ -26,9 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: (){
-
-        },
+        onPressed: () {},
         child: Icon(Icons.add_outlined),
         backgroundColor: Colors.deepPurpleAccent,
       ),
@@ -38,25 +36,29 @@ class _HomeScreenState extends State<HomeScreen> {
         type: BottomNavigationBarType.fixed,
         unselectedItemColor: Colors.black,
         selectedItemColor: Colors.deepPurpleAccent,
-        selectedIconTheme: IconThemeData(color: Colors.deepPurpleAccent,size: 36),
+        selectedIconTheme:
+            IconThemeData(color: Colors.deepPurpleAccent, size: 36),
         items: [
           BottomNavigationBarItem(
-            icon: Icon(
-              Icons.home_sharp,
-                          ),
+            icon: IconButton(
+              icon: Icon(
+                Icons.home_sharp,
+              ),
+            ),
             label: "Home",
           ),
           BottomNavigationBarItem(
-            icon: Icon(
-              Icons.person_outline_outlined,
-
+            icon: IconButton(
+              icon: Icon(
+                Icons.person_outline_outlined,
+              ),
             ),
             label: "Profile",
           ),
         ],
         iconSize: 27,
         currentIndex: selectedIndex,
-        onTap: (index){
+        onTap: (index) {
           setState(() {
             selectedIndex = index;
           });
