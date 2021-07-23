@@ -1,3 +1,4 @@
+import 'package:evento/screens/event_screen.dart';
 import 'package:flutter/material.dart';
 import 'screens/home_screen.dart';
 import 'screens/user_screen.dart';
@@ -19,6 +20,9 @@ class StartScreen extends StatelessWidget {
         UserScreen.id: (context) {
           return UserScreen();
         },
+        EventScreen.id :(context){
+          return EventScreen();
+        }
       },
     );
   }
