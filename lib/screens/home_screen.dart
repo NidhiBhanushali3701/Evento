@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:evento/resources.dart';
 
 class HomeScreen extends StatefulWidget {
   static String id = "HomeScreen";
@@ -13,8 +14,14 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       body: SafeArea(
         child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+          ),
           child: Column(
-            children: <Widget>[],
+            children: <Widget>[
+              TopBar(),
+              //ListView(),
+            ],
           ),
         ),
       ),
@@ -38,13 +45,6 @@ class _HomeScreenState extends State<HomeScreen> {
               Icons.home_sharp,
                           ),
             label: "Home",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.calendar_today,
-
-            ),
-            label: "Calender",
           ),
           BottomNavigationBarItem(
             icon: Icon(
