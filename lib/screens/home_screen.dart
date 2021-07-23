@@ -18,30 +18,43 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: (){
+
+        },
+        child: Icon(Icons.add_outlined),
+        backgroundColor: Colors.deepPurpleAccent,
+      ),
       bottomNavigationBar: BottomNavigationBar(
+        showSelectedLabels: false,
+        showUnselectedLabels: false,
+        type: BottomNavigationBarType.fixed,
+        unselectedItemColor: Colors.black,
+        selectedItemColor: Colors.deepPurpleAccent,
+        selectedIconTheme: IconThemeData(color: Colors.deepPurpleAccent,size: 36),
         items: [
           BottomNavigationBarItem(
             icon: Icon(
               Icons.home_sharp,
-              size: 35,
-            ),
+                          ),
             label: "Home",
           ),
           BottomNavigationBarItem(
             icon: Icon(
               Icons.calendar_today,
-              size: 35,
+
             ),
             label: "Calender",
           ),
           BottomNavigationBarItem(
             icon: Icon(
               Icons.person_outline_outlined,
-              size: 35,
+
             ),
             label: "Profile",
           ),
         ],
+        iconSize: 27,
         currentIndex: selectedIndex,
         onTap: (index){
           setState(() {
