@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import "package:share/share.dart";
+import 'package:evento/obj/event.dart';
 
 class EventScreen extends StatefulWidget {
   static String id = "EventScreen";
@@ -8,6 +10,11 @@ class EventScreen extends StatefulWidget {
 
 class _EventScreenState extends State<EventScreen> {
   int selectedIndex = 0;
+  Event event = Event();
+
+  void shareEvent(){
+    Share.share("I am attending Evento Event \${event.name}");
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -73,7 +80,9 @@ class _EventScreenState extends State<EventScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.deepPurpleAccent,
-        onPressed: () {},
+        onPressed: () {
+          shareEvent();
+        },
         child: Icon(
           Icons.ios_share,
         ),
