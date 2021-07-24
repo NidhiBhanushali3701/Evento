@@ -41,6 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
         items: [
           BottomNavigationBarItem(
             icon: IconButton(
+              onPressed: (){},
               icon: Icon(
                 Icons.home_sharp,
               ),
@@ -49,6 +50,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           BottomNavigationBarItem(
             icon: IconButton(
+              onPressed: (){},
               icon: Icon(
                 Icons.person_outline_outlined,
               ),
