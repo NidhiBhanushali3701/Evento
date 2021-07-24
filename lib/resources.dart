@@ -15,7 +15,10 @@ class TopBar extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
                   "Evento",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 27),
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 27,
+                  ),
                 ),
               ),
             ),

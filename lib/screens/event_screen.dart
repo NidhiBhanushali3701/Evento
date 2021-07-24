@@ -12,13 +12,13 @@ class _EventScreenState extends State<EventScreen> {
   int selectedIndex = 0;
   Event event = Event();
 
-  void shareEvent(){
+  void shareEvent() {
     Share.share("I am attending Evento Event \${event.name}");
   }
 
   @override
   Widget build(BuildContext context) {
-    var screenHt = MediaQuery.of(context).size.height,
+    double screenHt = MediaQuery.of(context).size.height,
         screenWd = MediaQuery.of(context).size.width;
 
     return Scaffold(
@@ -32,48 +32,28 @@ class _EventScreenState extends State<EventScreen> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Expanded(
-                flex: 5,
+                flex: 10,
                 child: Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(
-                        20,
+                        30,
                       ),
                     ),
                   ),
                   height: screenHt * 0.35,
-                  child: Padding(
-                    padding: const EdgeInsets.all(0.0),
-                    child: Image(
-                      image: NetworkImage(
-                        "https://images.unsplash.com/photo-1603912743224-7f7643c3e25b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80",
-                      ),
+                  child: Image(
+                    fit: BoxFit.fitWidth,
+                    image: NetworkImage(
+                      "https://images.unsplash.com/photo-1603912743224-7f7643c3e25b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80",
                     ),
                   ),
                 ),
               ),
-              SizedBox(),
-              Expanded(
-                flex: 1,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    child: Text(
-                      "Event Head",
-                    ),
-                  ),
-                ),
+              SizedBox(
+                height: screenHt * 0.01,
               ),
-              SizedBox(),
-              Expanded(
-                flex: 2,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    child: Text("Event Info"),
-                  ),
-                ),
-              ),
+              ScrollingContainer(),
             ],
           ),
         ),
@@ -81,6 +61,7 @@ class _EventScreenState extends State<EventScreen> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.deepPurpleAccent,
         onPressed: () {
+          print("ht $screenHt , wd $screenWd");
           shareEvent();
         },
         child: Icon(
@@ -94,7 +75,7 @@ class _EventScreenState extends State<EventScreen> {
         unselectedItemColor: Colors.black,
         selectedItemColor: Colors.deepPurpleAccent,
         selectedIconTheme:
-            IconThemeData(color: Colors.deepPurpleAccent, size: 36),
+            IconThemeData(color: Colors.deepPurpleAccent, size: 30),
         items: [
           BottomNavigationBarItem(
             icon: IconButton(
@@ -122,6 +103,56 @@ class _EventScreenState extends State<EventScreen> {
             selectedIndex = index;
           });
         },
+      ),
+    );
+  }
+}
+
+class ScrollingContainer extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    double screenHt = MediaQuery.of(context).size.height,
+        screenWd = MediaQuery.of(context).size.width;
+    return Expanded(
+      flex: 6,
+      child: SingleChildScrollView(
+        child: Container(
+          margin: const EdgeInsets.all(10.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Container(
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Text(
+                    "Event Head",
+                    style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      fontSize: 25.5,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: screenHt * 0.01,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(
+                    left: 15, right: 15, top: 5, bottom: 5),
+                child: Container(
+                  child: Text(
+                    "Event Info : Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui dicta minus molestiae vel beatae natus eveniet ratione temporibus aperiam harum alias officiis assumenda officia quibusdam deleniti eos cupiditate dolore doloribus!",
+                    style: TextStyle(
+                      fontWeight: FontWeight.w400,
+                      fontSize: 21,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

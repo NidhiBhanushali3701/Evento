@@ -1,3 +1,4 @@
+import 'package:evento/screens/user_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:evento/resources.dart';
 
@@ -37,11 +38,11 @@ class _HomeScreenState extends State<HomeScreen> {
         unselectedItemColor: Colors.black,
         selectedItemColor: Colors.deepPurpleAccent,
         selectedIconTheme:
-            IconThemeData(color: Colors.deepPurpleAccent, size: 36),
+            IconThemeData(color: Colors.deepPurpleAccent, size: 30),
         items: [
           BottomNavigationBarItem(
             icon: IconButton(
-              onPressed: (){},
+              onPressed: () {},
               icon: Icon(
                 Icons.home_sharp,
               ),
@@ -50,7 +51,9 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           BottomNavigationBarItem(
             icon: IconButton(
-              onPressed: (){},
+              onPressed: () {
+                Navigator.pushNamed(context, UserScreen.id);
+              },
               icon: Icon(
                 Icons.person_outline_outlined,
               ),
