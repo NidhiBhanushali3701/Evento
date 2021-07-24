@@ -1,6 +1,8 @@
+import 'package:evento/obj/event.dart';
 import 'package:evento/screens/user_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:evento/resources.dart';
+import 'package:evento/obj/event.dart';
 
 class HomeScreen extends StatefulWidget {
   static String id = "HomeScreen";
@@ -10,6 +12,8 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int selectedIndex = 0;
+  List events = [];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,6 +25,25 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Column(
             children: <Widget>[
               TopBar(),
+              Row(
+                children: [
+                  Expanded(
+                    child: SizedBox(
+                      height: 200.0,
+                      child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        shrinkWrap: true,
+                        itemBuilder: (BuildContext context, int index) {
+                          return Container(
+                            child: Text(events[index].name),
+                          );
+                        },
+                        itemCount: events.length,
+                      ),
+                    ),
+                  ),
+                ],
+              )
               //ListView(),
             ],
           ),
