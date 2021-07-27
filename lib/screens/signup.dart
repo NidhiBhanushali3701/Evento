@@ -1,5 +1,8 @@
+import 'package:evento/screens/otp.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+
+import 'otp.dart';
 
 class SignUpScreen extends StatefulWidget {
   static String id = "SignUp";
@@ -19,49 +22,53 @@ class _SignUpState extends State<SignUpScreen> {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Container(
-            child: Column(
-              children: [
-                TextField(
-                  decoration: InputDecoration(
-                    hintText: "Phone Number",
+            child: Padding(
+              padding: const EdgeInsets.all(18.0),
+              child: Column(
+                children: [
+                  TextField(
+                    decoration: InputDecoration(
+                      hintText: "Phone Number",
+                    ),
+                    onChanged: (value) {
+                      phone = ("+91" + value);
+                    },
                   ),
-                  onChanged: (value) {
-                    phone = ("+91" + value);
-                  },
-                ),
-                SizedBox(
-                  height: 27,
-                ),
-                ElevatedButton(
-                  onPressed: () async {
-                    try {
-                      var user = await _auth.verifyPhoneNumber(
-                          phoneNumber: phone,
-                          verificationCompleted: (phoneAuthCredential) async {
-                            print(phoneAuthCredential);
-                          },
-                          verificationFailed: (verificationFailed) async {
-                            print("Verification Failed... $verificationFailed");
-                            _scaffoldKey.currentState.showSnackBar(SnackBar(
-                                content: Text(verificationFailed.message)));
-                          },
-                          codeSent: (verificationID, resendingToken) async {
-                            setState(() {
-                              this.verificationID = verificationID;
+                  SizedBox(
+                    height: 27,
+                  ),
+                  ElevatedButton(
+                    onPressed: () async {
+                      try {
+                        var user = await _auth.verifyPhoneNumber(
+                            phoneNumber: phone,
+                            verificationCompleted: (phoneAuthCredential) async {
+                              print(phoneAuthCredential);
+                            },
+                            verificationFailed: (verificationFailed) async {
+                              print(
+                                  "Verification Failed... $verificationFailed");
+                              //_scaffoldKey.currentState.showSnackBar(SnackBar(content: Text(verificationFailed.message)));
+                            },
+                            codeSent: (verificationID, resendingToken) async {
+                              setState(() {
+                                this.verificationID = verificationID;
+                              });
+                            },
+                            codeAutoRetrievalTimeout: (verificationID) async {
+                              print("$verificationID");
                             });
-                          },
-                          codeAutoRetrievalTimeout: (verificationID) async {
-                            print("$verificationID");
-                          });
-                    } catch (e) {
-                      print(e);
-                    }
-                  },
-                  child: Text(
-                    "SUBMIT",
+                        Navigator.pushReplacementNamed(context, OTPScreen.id);
+                      } catch (e) {
+                        print(e);
+                      }
+                    },
+                    child: Text(
+                      "SUBMIT",
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),

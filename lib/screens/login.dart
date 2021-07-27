@@ -14,23 +14,26 @@ class _LogInState extends State<LogInScreen> {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Container(
-            child: Column(
-              children: [
-                TextField(
-                  onChanged: (value) {
-                    phone = ("+91" + value);
-                  },
-                ),
-                SizedBox(
-                  height: 27,
-                ),
-                ElevatedButton(
-                  onPressed: () {},
-                  child: Text(
-                    "SUBMIT",
+            child: Padding(
+              padding: const EdgeInsets.all(18.0),
+              child: Column(
+                children: [
+                  TextField(
+                    onChanged: (value) {
+                      phone = ("+91" + value);
+                    },
                   ),
-                ),
-              ],
+                  SizedBox(
+                    height: 27,
+                  ),
+                  ElevatedButton(
+                    onPressed: () {},
+                    child: Text(
+                      "SUBMIT",
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
