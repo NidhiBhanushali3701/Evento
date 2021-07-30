@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-class LogInScreen extends StatefulWidget {
+class PhoneLogIn extends StatefulWidget {
   static String id = "LogIn";
   @override
-  _LogInState createState() => _LogInState();
+  _PhoneLogInState createState() => _PhoneLogInState();
 }
 
-class _LogInState extends State<LogInScreen> {
+class _PhoneLogInState extends State<PhoneLogIn> {
   var phone;
   @override
   Widget build(BuildContext context) {

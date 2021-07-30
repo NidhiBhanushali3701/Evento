@@ -1,16 +1,15 @@
-import 'package:evento/screens/otp.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'otp.dart';
 
-class SignUpScreen extends StatefulWidget {
+class PhoneSignUp extends StatefulWidget {
   static String id = "SignUp";
   @override
-  _SignUpState createState() => _SignUpState();
+  _PhoneSignUpState createState() => _PhoneSignUpState();
 }
 
-class _SignUpState extends State<SignUpScreen> {
+class _PhoneSignUpState extends State<PhoneSignUp> {
   FirebaseAuth _auth = FirebaseAuth.instance;
   var phone;
   String verificationID, verificationComplete;
