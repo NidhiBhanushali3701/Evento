@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'otp.dart';
 
 class PhoneSignUp extends StatefulWidget {
-  static String id = "SignUp";
+  static String id = "PhoneSignUp";
   @override
   _PhoneSignUpState createState() => _PhoneSignUpState();
 }

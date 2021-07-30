@@ -1,7 +1,9 @@
+import 'package:evento/auth/email_signup.dart';
 import 'package:evento/screens/event_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
+import 'auth/email_login.dart';
 import 'auth/otp.dart';
 import 'auth/phone_login.dart';
 import 'auth/phone_signup.dart';
@@ -19,7 +21,7 @@ class StartScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: PhoneSignUp.id,
+      initialRoute: EmailSignUp.id,
       routes: {
         HomeScreen.id: (context) {
           return HomeScreen();
@@ -35,6 +37,12 @@ class StartScreen extends StatelessWidget {
         },
         PhoneSignUp.id: (context) {
           return PhoneSignUp();
+        },
+        EmailLogIn.id: (context) {
+          return EmailLogIn();
+        },
+        EmailSignUp.id: (context) {
+          return EmailSignUp();
         },
         OTPScreen.id: (context) {
           return OTPScreen();

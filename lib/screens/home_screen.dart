@@ -1,8 +1,7 @@
-import 'package:evento/obj/event.dart';
-import 'package:evento/screens/user_screen.dart';
-import 'package:flutter/material.dart';
 import 'package:evento/resources.dart';
-import 'package:evento/obj/event.dart';
+import 'package:evento/screens/user_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
   static String id = "HomeScreen";
@@ -13,6 +12,21 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int selectedIndex = 0;
   List events = [];
+  var loggedInUser;
+  FirebaseAuth _auth = FirebaseAuth.instance;
+  Future getCurrentUser() async {
+    var user = await _auth.currentUser;
+    if (user != null) {
+      loggedInUser = user;
+      print(loggedInUser.email);
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getCurrentUser();
+  }
 
   @override
   Widget build(BuildContext context) {
