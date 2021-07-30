@@ -48,9 +48,7 @@ class _EmailSignUpState extends State<EmailSignUp> {
                   //padding: const EdgeInsets.only(left:15.0,right: 15.0,top:0,bottom: 0),
                   padding: EdgeInsets.symmetric(horizontal: 15),
                   child: TextField(
-                    textAlign: TextAlign.center,
                     keyboardType: TextInputType.text,
-                    // ignore: missing_return
                     decoration: InputDecoration(
                         border: OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.grey),
@@ -70,9 +68,7 @@ class _EmailSignUpState extends State<EmailSignUp> {
                   //padding: const EdgeInsets.only(left:15.0,right: 15.0,top:0,bottom: 0),
                   padding: EdgeInsets.symmetric(horizontal: 15),
                   child: TextField(
-                    textAlign: TextAlign.center,
                     keyboardType: TextInputType.emailAddress,
-                    // ignore: missing_return
                     decoration: InputDecoration(
                         border: OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.grey),
@@ -94,9 +90,6 @@ class _EmailSignUpState extends State<EmailSignUp> {
                   child: TextField(
                     obscureText: true,
                     keyboardType: TextInputType.text,
-                    textAlign: TextAlign.center,
-                    // ignore: missing_return
-
                     decoration: InputDecoration(
                         border: OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.grey),

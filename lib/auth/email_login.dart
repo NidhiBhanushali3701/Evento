@@ -53,7 +53,6 @@ class _EmailLogInState extends State<EmailLogIn> {
                   //padding: const EdgeInsets.only(left:15.0,right: 15.0,top:0,bottom: 0),
                   padding: EdgeInsets.symmetric(horizontal: 15),
                   child: TextField(
-                    textAlign: TextAlign.center,
                     keyboardType: TextInputType.emailAddress,
                     // ignore: missing_return
                     decoration: InputDecoration(
@@ -78,7 +77,7 @@ class _EmailLogInState extends State<EmailLogIn> {
                   child: TextField(
                     obscureText: true,
                     keyboardType: TextInputType.text,
-                    textAlign: TextAlign.center,
+
                     // ignore: missing_return
 
                     decoration: InputDecoration(
