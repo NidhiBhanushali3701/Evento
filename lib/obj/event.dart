@@ -43,4 +43,15 @@ class Event {
   void setNoOfUsers(int noOfUsers) {
     _noOfUsers = noOfUsers;
   }
+
+  Map toMap() {
+    var eventMap = {
+      "eventName": _name,
+      "eventImg": _img,
+      "noOfUsers": _noOfUsers,
+      "eventDescription": _description,
+      "eventDateTime": _dateTime,
+    };
+    return eventMap;
+  }
 }
