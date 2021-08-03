@@ -1,6 +1,8 @@
+import 'package:evento/obj/event.dart';
+import 'package:evento/screens/home_screen.dart';
+import 'package:evento/screens/user_screen.dart';
 import 'package:flutter/material.dart';
 import "package:share/share.dart";
-import 'package:evento/obj/event.dart';
 
 class EventScreen extends StatefulWidget {
   static String id = "EventScreen";
@@ -79,7 +81,9 @@ class _EventScreenState extends State<EventScreen> {
         items: [
           BottomNavigationBarItem(
             icon: IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushReplacementNamed(context, HomeScreen.id);
+              },
               icon: Icon(
                 Icons.home_sharp,
               ),
@@ -88,7 +92,9 @@ class _EventScreenState extends State<EventScreen> {
           ),
           BottomNavigationBarItem(
             icon: IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushReplacementNamed(context, UserScreen.id);
+              },
               icon: Icon(
                 Icons.person_outline_outlined,
               ),

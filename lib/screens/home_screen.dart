@@ -53,10 +53,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     } else {
                       for (var event in snapshot.data.docs.reversed) {
                         var e = Event();
-                        e.setName(event.get('name'));
-                        e.setDateTime(event.get('dateTime'));
-                        e.setDescription(event.get("description"));
-                        e.setImg(event.get("img"));
+                        e.setName(event.get('eventName'));
+                        e.setDateTime(event.get('eventDateTime'));
+                        e.setDescription(event.get("eventDescription"));
+                        e.setImg(event.get("eventImg"));
                         e.setNoOfUsers(event.get("noOfUsers"));
                         events.add(e);
                       }
@@ -101,7 +101,9 @@ class _HomeScreenState extends State<HomeScreen> {
         items: [
           BottomNavigationBarItem(
             icon: IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushReplacementNamed(context, HomeScreen.id);
+              },
               icon: Icon(
                 Icons.home_sharp,
               ),
@@ -111,7 +113,7 @@ class _HomeScreenState extends State<HomeScreen> {
           BottomNavigationBarItem(
             icon: IconButton(
               onPressed: () {
-                Navigator.pushNamed(context, UserScreen.id);
+                Navigator.pushReplacementNamed(context, UserScreen.id);
               },
               icon: Icon(
                 Icons.person_outline_outlined,
