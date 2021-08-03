@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:evento/obj/event.dart';
 import 'package:evento/screens/home_screen.dart';
 import 'package:evento/screens/user_screen.dart';
@@ -12,10 +13,17 @@ class EventScreen extends StatefulWidget {
 
 class _EventScreenState extends State<EventScreen> {
   int selectedIndex = 0;
+  FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
   Event event = Event();
 
   void shareEvent() {
     Share.share("I am attending Evento Event \${event.name}");
+  }
+
+  Future incrementEventAttender() async {
+    var evt =
+        await _firebaseFirestore.collection("events").doc("myevent").get();
+    var a = evt['noOfUsers'];
   }
 
   @override
@@ -56,6 +64,17 @@ class _EventScreenState extends State<EventScreen> {
                 height: screenHt * 0.01,
               ),
               ScrollingContainer(),
+              SizedBox(
+                height: screenHt * 0.01,
+              ),
+              Container(
+                child: MaterialButton(
+                  child: Text("Attend!"),
+                  onPressed: () async {
+                    await incrementEventAttender();
+                  },
+                ),
+              ),
             ],
           ),
         ),

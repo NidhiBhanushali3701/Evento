@@ -3,6 +3,7 @@ import 'package:evento/obj/event.dart';
 import 'package:flutter/material.dart';
 
 class NewEventScreen extends StatefulWidget {
+  static String id = "NewEventScreen";
   @override
   _NewEventScreenState createState() => _NewEventScreenState();
 }
@@ -18,6 +19,9 @@ class _NewEventScreenState extends State<NewEventScreen> {
           child: Form(
             child: Column(
               children: [
+                SizedBox(
+                  height: 20,
+                ),
                 Container(
                   child: Padding(
                     //padding: const EdgeInsets.only(left:15.0,right: 15.0,top:0,bottom: 0),
@@ -43,7 +47,9 @@ class _NewEventScreenState extends State<NewEventScreen> {
                     ),
                   ),
                 ),
-                SizedBox(),
+                SizedBox(
+                  height: 20,
+                ),
                 Container(
                   child: Padding(
                     //padding: const EdgeInsets.only(left:15.0,right: 15.0,top:0,bottom: 0),
@@ -67,7 +73,9 @@ class _NewEventScreenState extends State<NewEventScreen> {
                     ),
                   ),
                 ),
-                SizedBox(),
+                SizedBox(
+                  height: 20,
+                ),
                 Container(
                   child: Padding(
                     //padding: const EdgeInsets.only(left:15.0,right: 15.0,top:0,bottom: 0),

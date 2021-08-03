@@ -1,7 +1,9 @@
 import 'package:evento/auth/email_signup.dart';
 import 'package:evento/screens/event_screen.dart';
+import 'package:evento/screens/new_event_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+
 import 'auth/email_login.dart';
 import 'auth/otp.dart';
 import 'auth/phone_login.dart';
@@ -30,6 +32,9 @@ class StartScreen extends StatelessWidget {
         },
         EventScreen.id: (context) {
           return EventScreen();
+        },
+        NewEventScreen.id: (context) {
+          return NewEventScreen();
         },
         PhoneLogIn.id: (context) {
           return PhoneLogIn();

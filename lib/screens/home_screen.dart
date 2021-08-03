@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:evento/obj/event.dart';
 import 'package:evento/resources.dart';
+import 'package:evento/screens/new_event_screen.dart';
 import 'package:evento/screens/user_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -36,57 +37,65 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-          ),
-          child: Column(
-            children: <Widget>[
-              TopBar(),
-              StreamBuilder<QuerySnapshot>(
-                  stream: _firebase.collection("events").snapshots(),
-                  builder: (context, snapshot) {
-                    if (!snapshot.hasData) {
-                      return Center(
-                        child: CircularProgressIndicator(),
-                      );
-                    } else {
-                      for (var event in snapshot.data.docs.reversed) {
-                        var e = Event();
-                        e.setName(event.get('eventName'));
-                        e.setDateTime(event.get('eventDateTime'));
-                        e.setDescription(event.get("eventDescription"));
-                        e.setImg(event.get("eventImg"));
-                        e.setNoOfUsers(event.get("noOfUsers"));
-                        events.add(e);
-                      }
-                      return Row(
-                        children: [
-                          Expanded(
-                            child: SizedBox(
-                              height: 200.0,
-                              child: ListView.builder(
-                                scrollDirection: Axis.horizontal,
-                                shrinkWrap: true,
-                                itemBuilder: (BuildContext context, int index) {
-                                  return Container(
-                                    child: Text(events[index].name),
-                                  );
-                                },
-                                itemCount: events.length,
+        child: SingleChildScrollView(
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: Column(
+              children: <Widget>[
+                TopBar(),
+                SizedBox(
+                  height: 20,
+                ),
+                StreamBuilder<QuerySnapshot>(
+                    stream: _firebase.collection("events").snapshots(),
+                    builder: (context, snapshot) {
+                      if (!snapshot.hasData) {
+                        return Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      } else {
+                        for (var event in snapshot.data.docs.reversed) {
+                          var e = Event();
+                          e.setName(event.get('eventName'));
+                          e.setDateTime(event.get('eventDateTime'));
+                          e.setDescription(event.get("eventDescription"));
+                          e.setImg(event.get("eventImg"));
+                          e.setNoOfUsers(event.get("noOfUsers"));
+                          events.add(e);
+                        }
+                        return Row(
+                          children: [
+                            Expanded(
+                              child: SizedBox(
+                                height: 200.0,
+                                child: ListView.builder(
+                                  scrollDirection: Axis.horizontal,
+                                  shrinkWrap: true,
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
+                                    return Container(
+                                      child: Text(events[index].name),
+                                    );
+                                  },
+                                  itemCount: events.length,
+                                ),
                               ),
                             ),
-                          ),
-                        ],
-                      );
-                    }
-                  })
-            ],
+                          ],
+                        );
+                      }
+                    })
+              ],
+            ),
           ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pushNamed(context, NewEventScreen.id);
+        },
         child: Icon(Icons.add_outlined),
         backgroundColor: Colors.deepPurpleAccent,
       ),
