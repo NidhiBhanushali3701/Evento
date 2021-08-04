@@ -11,8 +11,9 @@ class _UserScreenState extends State<UserScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.deepPurpleAccent,
-        title: Text("Profile",),
+        title: Text(
+          "Profile",
+        ),
       ),
       body: SafeArea(
         child: Padding(
@@ -21,7 +22,10 @@ class _UserScreenState extends State<UserScreen> {
             margin: const EdgeInsets.all(3.0),
             child: Column(
               children: [
-                CircleAvatar(),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: CircleAvatar(),
+                ),
                 Container(),
                 Container(),
               ],

@@ -79,11 +79,28 @@ class _HomeScreenState extends State<HomeScreen> {
                                       (BuildContext context, int index) {
                                     return Container(
                                       child: Card(
-                                        child: Column(
-                                          children: [
-                                            Text(events[index].name),
-                                            Text(events[index].link),
-                                          ],
+                                        child: Padding(
+                                          padding: EdgeInsets.all(7.5),
+                                          child: Column(
+                                            children: [
+                                              Image.network(events[index].img),
+                                              SizedBox(
+                                                height: 10,
+                                              ),
+                                              Text(events[index].name),
+                                              SizedBox(
+                                                height: 10,
+                                              ),
+                                              Text(events[index].dateTime),
+                                              SizedBox(
+                                                height: 10,
+                                              ),
+                                              Text(events[index].noOfUsers),
+                                              SizedBox(
+                                                height: 10,
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                       ),
                                     );
