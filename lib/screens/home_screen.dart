@@ -64,6 +64,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           e.setDescription(event.get("eventDescription"));
                           e.setImg(event.get("eventImg"));
                           e.setNoOfUsers(event.get("noOfUsers"));
+                          e.setLink(event.get("eventLink"));
                           events.add(e);
                         }
                         return Row(
@@ -78,7 +79,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                       (BuildContext context, int index) {
                                     return Container(
                                       child: Card(
-                                        child: Text(events[index].name),
+                                        child: Column(
+                                          children: [
+                                            Text(events[index].name),
+                                            Text(events[index].link),
+                                          ],
+                                        ),
                                       ),
                                     );
                                   },

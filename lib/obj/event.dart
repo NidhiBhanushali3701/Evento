@@ -1,5 +1,5 @@
 class Event {
-  String _name, _description;
+  String _name, _description, _link;
   var _img;
   DateTime _dateTime;
   int _noOfUsers;
@@ -10,6 +10,14 @@ class Event {
 
   void setName(String name) {
     _name = name;
+  }
+
+  String get link {
+    return _name;
+  }
+
+  void setLink(String link) {
+    _link = link;
   }
 
   String get description {
@@ -51,6 +59,7 @@ class Event {
       "noOfUsers": _noOfUsers,
       "eventDescription": _description,
       "eventDateTime": _dateTime,
+      "eventLink": _link,
     };
     return eventMap;
   }

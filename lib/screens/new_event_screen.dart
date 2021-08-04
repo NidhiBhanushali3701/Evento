@@ -11,9 +11,11 @@ class NewEventScreen extends StatefulWidget {
 class _NewEventScreenState extends State<NewEventScreen> {
   FirebaseFirestore _fbfs = FirebaseFirestore.instance;
   Event event = Event();
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       body: SafeArea(
         child: Container(
           child: Form(
@@ -129,19 +131,44 @@ class _NewEventScreenState extends State<NewEventScreen> {
                   height: 20,
                 ),
                 Container(
+                  child: Padding(
+                    //padding: const EdgeInsets.only(left:15.0,right: 15.0,top:0,bottom: 0),
+                    padding: EdgeInsets.symmetric(horizontal: 15),
+                    child: TextField(
+                      textAlign: TextAlign.center,
+                      // ignore: missing_return
+                      decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.purple),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.purple)),
+                          labelText: 'Event Link',
+                          labelStyle: TextStyle(color: Colors.purple),
+                          hintText: 'Enter Event Link'),
+                      //onSaved: (newValue) => _nameController.text = newValue,//commented on 6.11pm 17-3-21
+                      onChanged: (value) {
+                        event.setLink(value);
+                      },
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Container(
                   padding: EdgeInsets.symmetric(horizontal: 15),
                   child: MaterialButton(
                     child: Text("Create Event"),
                     onPressed: () async {
                       await _fbfs
                           .collection("events")
-                          .doc("new event1")
-                          .set(event.toMap())
+                          .add(event.toMap())
                           .then((value) => print("Event Added Successfully!"));
                       Navigator.pop(context);
-                      SnackBar(
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                         content: Text("Event Added Successfully!"),
-                      );
+                      ));
                     },
                   ),
                 )
