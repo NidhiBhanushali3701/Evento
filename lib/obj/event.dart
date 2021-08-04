@@ -32,7 +32,7 @@ class Event {
     return _dateTime;
   }
 
-  void setDateTime(DateTime dateTime) {
+  void setDateTime(dateTime) {
     _dateTime = dateTime;
   }
 

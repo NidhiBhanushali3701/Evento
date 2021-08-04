@@ -56,6 +56,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           child: CircularProgressIndicator(),
                         );
                       } else {
+                        events = [];
                         for (var event in snapshot.data.docs.reversed) {
                           var e = Event();
                           e.setName(event.get('eventName'));
@@ -76,7 +77,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                   itemBuilder:
                                       (BuildContext context, int index) {
                                     return Container(
-                                      child: Text(events[index].name),
+                                      child: Card(
+                                        child: Text(events[index].name),
+                                      ),
                                     );
                                   },
                                   itemCount: events.length,
