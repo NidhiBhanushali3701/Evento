@@ -47,8 +47,10 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Column(
               children: <Widget>[
                 TopBar(
-                  loggedInUser: loggedInUser,
-                ),
+                    loggedInUser: loggedInUser,
+                    onTap: () {
+                      Navigator.pushNamed(context, UserScreen.id);
+                    }),
                 SizedBox(
                   height: 20,
                 ),
@@ -168,7 +170,7 @@ class _HomeScreenState extends State<HomeScreen> {
           BottomNavigationBarItem(
             icon: IconButton(
               onPressed: () {
-                Navigator.pushReplacementNamed(context, UserScreen.id);
+                Navigator.pushNamed(context, UserScreen.id);
               },
               icon: Icon(
                 Icons.person_outline_outlined,

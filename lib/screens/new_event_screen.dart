@@ -42,12 +42,21 @@ class _NewEventScreenState extends State<NewEventScreen> {
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
+        backgroundColor: Colors.deepPurpleAccent,
         title: Text(
-          "Add New Event",
-          style: TextStyle(color: Colors.deepPurpleAccent),
+          "Create Event",
+          style: TextStyle(color: Colors.white),
         ),
         centerTitle: true,
-        backgroundColor: Colors.white,
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back_ios,
+            color: Colors.deepPurpleAccent,
+          ),
+          onPressed: () {
+            Navigator.pop(context, false);
+          },
+        ),
       ),
       body: SafeArea(
         child: SingleChildScrollView(

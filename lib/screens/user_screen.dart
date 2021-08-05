@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:evento/screens/home_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -54,6 +55,16 @@ class _UserScreenState extends State<UserScreen> {
           style: TextStyle(color: Colors.white, letterSpacing: 1.5),
         ),
         centerTitle: true,
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back_ios,
+            color: Colors.deepPurpleAccent,
+          ),
+          onPressed: () {
+            Navigator.pushNamedAndRemoveUntil(
+                context, HomeScreen.id, (route) => false);
+          },
+        ),
       ),
       body: SafeArea(
         child: Padding(
@@ -83,7 +94,7 @@ class _UserScreenState extends State<UserScreen> {
                 Container(
                   child: ListTile(
                     leading: Icon(Icons.person),
-                    title: Text("${User['name']}"),
+                    title: Text("\${User['name']}"),
                     trailing: IconButton(
                       icon: Icon(Icons.edit),
                       onPressed: () {},
@@ -99,7 +110,7 @@ class _UserScreenState extends State<UserScreen> {
                 Container(
                   child: ListTile(
                     leading: Icon(Icons.phone),
-                    title: Text("${User['phone']}"),
+                    title: Text("\${User['phone']}"),
                     trailing: IconButton(
                       icon: Icon(Icons.edit),
                       onPressed: () {},
@@ -115,7 +126,7 @@ class _UserScreenState extends State<UserScreen> {
                 Container(
                   child: ListTile(
                     leading: Icon(Icons.email),
-                    title: Text("${loggedInUser.email}"),
+                    title: Text("\${loggedInUser.email}"),
                     trailing: IconButton(
                       icon: Icon(Icons.edit),
                       onPressed: () {},
