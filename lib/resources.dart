@@ -14,7 +14,7 @@ Widget TopBar({var loggedInUser, Function onTap}) {
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 27,
-                  letterSpacing: 1.5,
+                  letterSpacing: 2.1,
                 ),
               ),
             ),

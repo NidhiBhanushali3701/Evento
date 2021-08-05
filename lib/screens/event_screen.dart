@@ -69,32 +69,57 @@ class _EventScreenState extends State<EventScreen> {
               ),
               ScrollingContainer(
                 event: event,
+                onPress: () {
+                  shareEvent();
+                },
               ),
               SizedBox(
                 height: screenHt * 0.01,
               ),
               Container(
-                child: MaterialButton(
-                  child: Text("Attend!"),
+                padding: EdgeInsets.symmetric(horizontal: 15),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    textStyle: TextStyle(color: Colors.white10),
+                    elevation: 4,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(80.0)),
+                    padding: const EdgeInsets.all(0.0),
+                  ),
+                  child: Container(
+                    decoration: const BoxDecoration(
+                      gradient: LinearGradient(colors: <Color>[
+                        Colors.deepPurple,
+                        Colors.deepPurpleAccent
+                      ]),
+                      borderRadius: BorderRadius.all(Radius.circular(80.0)),
+                    ),
+                    child: Center(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text("Attend event",
+                            style: TextStyle(
+                              fontWeight: FontWeight.w800,
+                              fontSize: 30,
+                              color: Colors.white,
+                            )),
+                      ),
+                    ),
+                  ),
                   onPressed: () async {
-                    //await incrementEventAttender();
                     event.setNoOfUsers(event.noOfUsers + 1);
                     Navigator.pop(context, event);
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      content: Text("Event Added Successfully!"),
+                    ));
                   },
                 ),
               ),
+              SizedBox(
+                height: screenHt * 0.0775,
+              ),
             ],
           ),
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.deepPurpleAccent,
-        onPressed: () {
-          print("ht $screenHt , wd $screenWd");
-          shareEvent();
-        },
-        child: Icon(
-          Icons.ios_share,
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -143,7 +168,8 @@ class _EventScreenState extends State<EventScreen> {
 
 class ScrollingContainer extends StatelessWidget {
   final Event event;
-  ScrollingContainer({this.event});
+  Function onPress;
+  ScrollingContainer({this.event, this.onPress});
   @override
   Widget build(BuildContext context) {
     double screenHt = MediaQuery.of(context).size.height,
@@ -157,17 +183,33 @@ class ScrollingContainer extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Container(
-                child: Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Text(
-                    "${event.name}",
-                    style: TextStyle(
-                      fontWeight: FontWeight.w500,
-                      fontSize: 25.5,
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Container(
+                    child: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Text(
+                        "${event.name}",
+                        style: TextStyle(
+                            fontWeight: FontWeight.w500,
+                            fontSize: 25.5,
+                            letterSpacing: 1.5),
+                      ),
                     ),
                   ),
-                ),
+                  SizedBox(
+                    width: screenWd * 0.25,
+                  ),
+                  IconButton(
+                    onPressed: onPress,
+                    icon: Icon(
+                      Icons.share_outlined,
+                      color: Colors.grey,
+                    ),
+                  ),
+                ],
               ),
               SizedBox(
                 height: screenHt * 0.01,

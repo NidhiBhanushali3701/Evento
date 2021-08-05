@@ -19,14 +19,14 @@ class _UserScreenState extends State<UserScreen> {
     var userInfo = await _firestore.collection("users").get();
     for (var u in userInfo.docs) {
       if (u.data()['email'] == loggedInUser.email) {
-        print(u.data()['name']);
+        print(u.data()["email"]);
         User = u.data();
         break;
       }
     }
   }
 
-  void getCurrentUser() async {
+  Future getCurrentUser() async {
     try {
       var user = await _auth.currentUser;
       if (user != null) {

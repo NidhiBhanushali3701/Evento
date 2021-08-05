@@ -3,6 +3,8 @@ import 'package:evento/obj/event.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+import 'home_screen.dart';
+
 class NewEventScreen extends StatefulWidget {
   static String id = "NewEventScreen";
   @override
@@ -39,25 +41,10 @@ class _NewEventScreenState extends State<NewEventScreen> {
 
   @override
   Widget build(BuildContext context) {
+    double screenHt = MediaQuery.of(context).size.height,
+        screenWd = MediaQuery.of(context).size.width;
     return Scaffold(
       key: _scaffoldKey,
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        title: Text(
-          "Create Event",
-          style: TextStyle(color: Colors.deepPurpleAccent),
-        ),
-        centerTitle: true,
-        leading: IconButton(
-          icon: Icon(
-            Icons.arrow_back_ios,
-            color: Colors.deepPurpleAccent,
-          ),
-          onPressed: () {
-            Navigator.pop(context, false);
-          },
-        ),
-      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
@@ -66,15 +53,44 @@ class _NewEventScreenState extends State<NewEventScreen> {
               child: Form(
                 child: Column(
                   children: [
+                    Container(
+                      child: Row(
+                        children: [
+                          IconButton(
+                            icon: Icon(
+                              Icons.arrow_back_ios,
+                            ),
+                            onPressed: () {
+                              Navigator.pushReplacementNamed(
+                                  context, HomeScreen.id);
+                            },
+                          ),
+                          SizedBox(
+                            width: 20,
+                          ),
+                          Container(
+                            child: Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Text(
+                                "Create Event",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w800,
+                                  fontSize: 30,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                     SizedBox(
-                      height: 20,
+                      height: 40,
                     ),
                     Container(
                       child: Padding(
                         //padding: const EdgeInsets.only(left:15.0,right: 15.0,top:0,bottom: 0),
                         padding: EdgeInsets.symmetric(horizontal: 15),
                         child: TextField(
-                          textAlign: TextAlign.center,
                           // ignore: missing_return
                           decoration: InputDecoration(
                               border: OutlineInputBorder(
@@ -103,7 +119,6 @@ class _NewEventScreenState extends State<NewEventScreen> {
                         //padding: const EdgeInsets.only(left:15.0,right: 15.0,top:0,bottom: 0),
                         padding: EdgeInsets.symmetric(horizontal: 15),
                         child: TextField(
-                          textAlign: TextAlign.center,
                           // ignore: missing_return
                           decoration: InputDecoration(
                               border: OutlineInputBorder(
@@ -132,7 +147,6 @@ class _NewEventScreenState extends State<NewEventScreen> {
                         //padding: const EdgeInsets.only(left:15.0,right: 15.0,top:0,bottom: 0),
                         padding: EdgeInsets.symmetric(horizontal: 15),
                         child: TextField(
-                          textAlign: TextAlign.center,
                           // ignore: missing_return
                           decoration: InputDecoration(
                               border: OutlineInputBorder(
@@ -156,48 +170,6 @@ class _NewEventScreenState extends State<NewEventScreen> {
                     SizedBox(
                       height: 20,
                     ),
-                    InkWell(
-                      onTap: () {
-                        showDatePicker(
-                            context: context,
-                            initialDate: selectedDate,
-                            firstDate: DateTime.now(),
-                            lastDate: DateTime(2050));
-                      },
-                      child: Expanded(
-                        child: Container(
-                          child: Padding(
-                              //padding: const EdgeInsets.only(left:15.0,right: 15.0,top:0,bottom: 0),
-                              padding: EdgeInsets.symmetric(horizontal: 15),
-                              child: DatePickerDialog(
-                                firstDate: DateTime.now(),
-                                lastDate: DateTime(2050),
-                                initialDate: selectedDate,
-                              )),
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    // InkWell(
-                    //   onTap: () {
-                    //     showTimePicker(
-                    //         context: context,
-                    //         initialTime: TimeOfDay(hour: 00, minute: 00));
-                    //   },
-                    //   child: Expanded(
-                    //     child: Container(
-                    //       child: Padding(
-                    //           //padding: const EdgeInsets.only(left:15.0,right: 15.0,top:0,bottom: 0),
-                    //           padding: EdgeInsets.symmetric(horizontal: 15),
-                    //           child: TimePickerDialog()),
-                    //     ),
-                    //   ),
-                    // ),
-                    // SizedBox(
-                    //   height: 20,
-                    // ),
                     Container(
                       child: Padding(
                         //padding: const EdgeInsets.only(left:15.0,right: 15.0,top:0,bottom: 0),
@@ -225,12 +197,81 @@ class _NewEventScreenState extends State<NewEventScreen> {
                       ),
                     ),
                     SizedBox(
-                      height: 20,
+                      height: screenHt * 0.175,
                     ),
+                    // InkWell(
+                    //   onTap: () {
+                    //     showDatePicker(
+                    //         context: context,
+                    //         initialDate: selectedDate,
+                    //         firstDate: DateTime.now(),
+                    //         lastDate: DateTime(2050));
+                    //   },
+                    //   child: Expanded(
+                    //     child: Container(
+                    //       child: Padding(
+                    //           //padding: const EdgeInsets.only(left:15.0,right: 15.0,top:0,bottom: 0),
+                    //           padding: EdgeInsets.symmetric(horizontal: 15),
+                    //           child: DatePickerDialog(
+                    //             firstDate: DateTime.now(),
+                    //             lastDate: DateTime(2050),
+                    //             initialDate: selectedDate,
+                    //           )),
+                    //     ),
+                    //   ),
+                    // ),
+                    // SizedBox(
+                    //   height: 20,
+                    // ),
+                    // InkWell(
+                    //   onTap: () {
+                    //     showTimePicker(
+                    //         context: context,
+                    //         initialTime: TimeOfDay(hour: 00, minute: 00));
+                    //   },
+                    //   child: Expanded(
+                    //     child: Container(
+                    //       child: Padding(
+                    //           //padding: const EdgeInsets.only(left:15.0,right: 15.0,top:0,bottom: 0),
+                    //           padding: EdgeInsets.symmetric(horizontal: 15),
+                    //           child: TimePickerDialog()),
+                    //     ),
+                    //   ),
+                    // ),
+                    // SizedBox(
+                    //   height: 20,
+                    // ),
                     Container(
                       padding: EdgeInsets.symmetric(horizontal: 15),
-                      child: MaterialButton(
-                        child: Text("Create Event"),
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          textStyle: TextStyle(color: Colors.white10),
+                          elevation: 4,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(80.0)),
+                          padding: const EdgeInsets.all(0.0),
+                        ),
+                        child: Container(
+                          decoration: const BoxDecoration(
+                            gradient: LinearGradient(colors: <Color>[
+                              Colors.deepPurple,
+                              Colors.deepPurpleAccent
+                            ]),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(80.0)),
+                          ),
+                          child: Center(
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text("Create Event",
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w800,
+                                    fontSize: 30,
+                                    color: Colors.white,
+                                  )),
+                            ),
+                          ),
+                        ),
                         onPressed: () async {
                           event.setDateTime(Timestamp.now());
                           event.setCreator(loggedInUser.email);
@@ -249,7 +290,7 @@ class _NewEventScreenState extends State<NewEventScreen> {
                           ));
                         },
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),
