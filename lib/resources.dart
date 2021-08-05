@@ -1,4 +1,3 @@
-import 'package:evento/screens/event_screen.dart';
 import 'package:evento/screens/user_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -27,7 +26,7 @@ class TopBar extends StatelessWidget {
             ),
             GestureDetector(
               onTap: () {
-                Navigator.pushNamed(context, EventScreen.id);
+                Navigator.pushNamed(context, UserScreen.id);
               },
               child: CircleAvatar(
                 radius: 27,

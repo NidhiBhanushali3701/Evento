@@ -6,6 +6,8 @@ import 'package:evento/screens/user_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+import 'event_screen.dart';
+
 class HomeScreen extends StatefulWidget {
   static String id = "HomeScreen";
   @override
@@ -65,6 +67,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           e.setImg(event.get("eventImg"));
                           e.setNoOfUsers(event.get("noOfUsers"));
                           e.setLink(event.get("eventLink"));
+                          e.setCreator(event.get("eventCreator"));
                           events.add(e);
                         }
                         return Row(
@@ -77,29 +80,44 @@ class _HomeScreenState extends State<HomeScreen> {
                                   shrinkWrap: true,
                                   itemBuilder:
                                       (BuildContext context, int index) {
-                                    return Container(
-                                      child: Card(
-                                        child: Padding(
-                                          padding: EdgeInsets.all(7.5),
-                                          child: Column(
-                                            children: [
-                                              Image.network(events[index].img),
-                                              SizedBox(
-                                                height: 10,
-                                              ),
-                                              Text(events[index].name),
-                                              SizedBox(
-                                                height: 10,
-                                              ),
-                                              Text(events[index].dateTime),
-                                              SizedBox(
-                                                height: 10,
-                                              ),
-                                              Text(events[index].noOfUsers),
-                                              SizedBox(
-                                                height: 10,
-                                              ),
-                                            ],
+                                    return GestureDetector(
+                                      onTap: () {
+                                        Navigator.pushNamed(
+                                            context, EventScreen.id,
+                                            arguments: {
+                                              "This Event": events[index]
+                                            });
+                                      },
+                                      child: Container(
+                                        child: Card(
+                                          child: Padding(
+                                            padding: EdgeInsets.all(7.5),
+                                            child: Column(
+                                              children: [
+                                                Expanded(
+                                                    child: Container(
+                                                        child: Image.network(
+                                                            events[index]
+                                                                .img))),
+                                                SizedBox(
+                                                  height: 10,
+                                                ),
+                                                Text(events[index].name),
+                                                SizedBox(
+                                                  height: 10,
+                                                ),
+                                                Text(events[index].description),
+                                                SizedBox(
+                                                  height: 10,
+                                                ),
+                                                Text(events[index]
+                                                    .noOfUsers
+                                                    .toString()),
+                                                SizedBox(
+                                                  height: 10,
+                                                ),
+                                              ],
+                                            ),
                                           ),
                                         ),
                                       ),

@@ -1,8 +1,8 @@
 class Event {
-  String _name, _description, _link;
+  String _name, _description, _link, _creator;
   var _img;
-  DateTime _dateTime;
-  int _noOfUsers;
+  var _dateTime;
+  int _noOfUsers = 0;
 
   String get name {
     return _name;
@@ -12,8 +12,16 @@ class Event {
     _name = name;
   }
 
+  String get creator {
+    return _creator;
+  }
+
+  void setCreator(String creator) {
+    _creator = creator;
+  }
+
   String get link {
-    return _name;
+    return _link;
   }
 
   void setLink(String link) {
@@ -21,7 +29,7 @@ class Event {
   }
 
   String get description {
-    return _name;
+    return _description;
   }
 
   void setDescription(String description) {
@@ -36,7 +44,7 @@ class Event {
     _img = img;
   }
 
-  DateTime get dateTime {
+  dynamic get dateTime {
     return _dateTime;
   }
 
@@ -60,6 +68,7 @@ class Event {
       "eventDescription": _description,
       "eventDateTime": _dateTime,
       "eventLink": _link,
+      "eventCreator": _creator,
     };
     return eventMap;
   }

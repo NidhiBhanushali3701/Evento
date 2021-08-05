@@ -17,17 +17,21 @@ class _EventScreenState extends State<EventScreen> {
   Event event = Event();
 
   void shareEvent() {
-    Share.share("I am attending Evento Event \${event.name}");
+    Share.share(
+        "I am attending Evento Event ${event.name}! You can also join it Link ${event.link} at ${event.dateTime}");
   }
 
   Future incrementEventAttender() async {
-    var evt =
-        await _firebaseFirestore.collection("events").doc("myevent").get();
-    var a = evt['noOfUsers'];
+    var evt = await _firebaseFirestore.collection("events").get();
+    //var a = evt['noOfUsers'];
   }
 
   @override
   Widget build(BuildContext context) {
+    final Map arguments = ModalRoute.of(context).settings.arguments as Map;
+    if (arguments != null) {
+      event = arguments["This Event"];
+    }
     double screenHt = MediaQuery.of(context).size.height,
         screenWd = MediaQuery.of(context).size.width;
 
@@ -55,7 +59,7 @@ class _EventScreenState extends State<EventScreen> {
                   child: Image(
                     fit: BoxFit.fitWidth,
                     image: NetworkImage(
-                      "https://images.unsplash.com/photo-1603912743224-7f7643c3e25b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80",
+                      "${event.img}",
                     ),
                   ),
                 ),
@@ -63,7 +67,9 @@ class _EventScreenState extends State<EventScreen> {
               SizedBox(
                 height: screenHt * 0.01,
               ),
-              ScrollingContainer(),
+              ScrollingContainer(
+                event: event,
+              ),
               SizedBox(
                 height: screenHt * 0.01,
               ),
@@ -71,7 +77,9 @@ class _EventScreenState extends State<EventScreen> {
                 child: MaterialButton(
                   child: Text("Attend!"),
                   onPressed: () async {
-                    await incrementEventAttender();
+                    //await incrementEventAttender();
+                    event.setNoOfUsers(event.noOfUsers + 1);
+                    Navigator.pop(context, event);
                   },
                 ),
               ),
@@ -134,6 +142,8 @@ class _EventScreenState extends State<EventScreen> {
 }
 
 class ScrollingContainer extends StatelessWidget {
+  final Event event;
+  ScrollingContainer({this.event});
   @override
   Widget build(BuildContext context) {
     double screenHt = MediaQuery.of(context).size.height,
@@ -151,7 +161,7 @@ class ScrollingContainer extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: Text(
-                    "Event Head",
+                    "${event.name}",
                     style: TextStyle(
                       fontWeight: FontWeight.w500,
                       fontSize: 25.5,
@@ -167,7 +177,7 @@ class ScrollingContainer extends StatelessWidget {
                     left: 15, right: 15, top: 5, bottom: 5),
                 child: Container(
                   child: Text(
-                    "Event Info : Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui dicta minus molestiae vel beatae natus eveniet ratione temporibus aperiam harum alias officiis assumenda officia quibusdam deleniti eos cupiditate dolore doloribus!",
+                    "${event.description}",
                     style: TextStyle(
                       fontWeight: FontWeight.w400,
                       fontSize: 21,
