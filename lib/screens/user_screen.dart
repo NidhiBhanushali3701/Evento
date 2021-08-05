@@ -11,8 +11,12 @@ class _UserScreenState extends State<UserScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          "Profile",
+        backgroundColor: Colors.white,
+        title: Center(
+          child: Text(
+            "Profile",
+            style: TextStyle(color: Colors.deepPurpleAccent),
+          ),
         ),
       ),
       body: SafeArea(
