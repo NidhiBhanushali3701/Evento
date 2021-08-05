@@ -42,10 +42,10 @@ class _NewEventScreenState extends State<NewEventScreen> {
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
-        backgroundColor: Colors.deepPurpleAccent,
+        backgroundColor: Colors.white,
         title: Text(
           "Create Event",
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(color: Colors.deepPurpleAccent),
         ),
         centerTitle: true,
         leading: IconButton(

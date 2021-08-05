@@ -49,7 +49,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 TopBar(
                     loggedInUser: loggedInUser,
                     onTap: () {
-                      Navigator.pushNamed(context, UserScreen.id);
+                      Navigator.pushNamed(context, UserScreen.id,
+                          arguments: {"loggedInUser": loggedInUser});
                     }),
                 SizedBox(
                   height: 20,
