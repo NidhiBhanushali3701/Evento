@@ -42,12 +42,11 @@ class _NewEventScreenState extends State<NewEventScreen> {
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
-        title: Center(
-          child: Text(
-            "Add New Event",
-            style: TextStyle(color: Colors.deepPurpleAccent),
-          ),
+        title: Text(
+          "Add New Event",
+          style: TextStyle(color: Colors.deepPurpleAccent),
         ),
+        centerTitle: true,
         backgroundColor: Colors.white,
       ),
       body: SafeArea(
@@ -226,6 +225,10 @@ class _NewEventScreenState extends State<NewEventScreen> {
                         onPressed: () async {
                           event.setDateTime(Timestamp.now());
                           event.setCreator(loggedInUser.email);
+                          if (event.img == null) {
+                            event.setImg(
+                                "https://images.unsplash.com/photo-1607835017779-c176b83b2dd8?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=739&q=80");
+                          }
                           await _fbfs
                               .collection("events")
                               .add(event.toMap())

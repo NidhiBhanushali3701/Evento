@@ -10,14 +10,18 @@ class UserScreen extends StatefulWidget {
 
 class _UserScreenState extends State<UserScreen> {
   var loggedInUser;
-  var userInfo;
+  var User;
   FirebaseAuth _auth = FirebaseAuth.instance;
   FirebaseFirestore _firestore = FirebaseFirestore.instance;
   Future getUserInfo() async {
-    userInfo = await _firestore
-        .collection("users")
-        .where('email', isEqualTo: loggedInUser.email)
-        .get();
+    var userInfo = await _firestore.collection("users").get();
+    for (var u in userInfo.docs) {
+      if (u.data()['email'] == loggedInUser.email) {
+        print(u.data()['name']);
+        User = u.data();
+        break;
+      }
+    }
   }
 
   void getCurrentUser() async {
@@ -43,6 +47,14 @@ class _UserScreenState extends State<UserScreen> {
     double screenHt = MediaQuery.of(context).size.height,
         screenWd = MediaQuery.of(context).size.width;
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.deepPurpleAccent,
+        title: Text(
+          "Profile",
+          style: TextStyle(color: Colors.white, letterSpacing: 1.5),
+        ),
+        centerTitle: true,
+      ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(12.0),
@@ -50,18 +62,6 @@ class _UserScreenState extends State<UserScreen> {
             margin: const EdgeInsets.all(3.0),
             child: Column(
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    child: Text(
-                      "Profile",
-                      style: TextStyle(
-                          color: Colors.deepPurpleAccent,
-                          fontSize: 40,
-                          fontWeight: FontWeight.w500),
-                    ),
-                  ),
-                ),
                 Container(
                   child: SizedBox(
                     height: screenHt * 0.030,
@@ -71,7 +71,8 @@ class _UserScreenState extends State<UserScreen> {
                   padding: const EdgeInsets.all(8.0),
                   child: CircleAvatar(
                     radius: 55,
-                    backgroundImage: NetworkImage("${loggedInUser.photoURL}"),
+                    backgroundImage: NetworkImage(
+                        "https://images.unsplash.com/photo-1604426633861-11b2faead63c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1900&q=80"),
                   ),
                 ),
                 Container(
@@ -82,7 +83,23 @@ class _UserScreenState extends State<UserScreen> {
                 Container(
                   child: ListTile(
                     leading: Icon(Icons.person),
-                    title: Text("${loggedInUser.displayName}"),
+                    title: Text("${User['name']}"),
+                    trailing: IconButton(
+                      icon: Icon(Icons.edit),
+                      onPressed: () {},
+                    ),
+                  ),
+                ),
+                Container(
+                  child: Divider(
+                    height: screenHt * 0.030,
+                    color: Colors.grey,
+                  ),
+                ),
+                Container(
+                  child: ListTile(
+                    leading: Icon(Icons.phone),
+                    title: Text("${User['phone']}"),
                     trailing: IconButton(
                       icon: Icon(Icons.edit),
                       onPressed: () {},
