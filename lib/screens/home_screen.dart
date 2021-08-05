@@ -46,7 +46,9 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             child: Column(
               children: <Widget>[
-                TopBar(),
+                TopBar(
+                  loggedInUser: loggedInUser,
+                ),
                 SizedBox(
                   height: 20,
                 ),

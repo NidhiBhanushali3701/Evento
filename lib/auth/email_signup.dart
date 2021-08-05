@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:evento/auth/email_login.dart';
 import 'package:evento/screens/home_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -10,8 +11,20 @@ class EmailSignUp extends StatefulWidget {
 }
 
 class _EmailSignUpState extends State<EmailSignUp> {
-  var email, name, password;
+  var email, name, password, phone;
   FirebaseAuth _auth = FirebaseAuth.instance;
+  FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  Future addUserInfo() async {
+    await _firestore.collection("users").doc(email).set({
+      "email": email,
+      "name": name,
+      "password": password,
+      "phone": phone,
+      "photoURL":
+          "https://images.unsplash.com/photo-1604426633861-11b2faead63c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1900&q=80"
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -85,6 +98,26 @@ class _EmailSignUpState extends State<EmailSignUp> {
                   height: 10,
                 ),
                 Padding(
+                  //padding: const EdgeInsets.only(left:15.0,right: 15.0,top:0,bottom: 0),
+                  padding: EdgeInsets.symmetric(horizontal: 15),
+                  child: TextField(
+                    keyboardType: TextInputType.phone,
+                    decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.grey),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.grey)),
+                        labelText: 'Phone Number',
+                        labelStyle: TextStyle(color: Colors.grey),
+                        hintText: 'Enter valid phone number'),
+                    onChanged: (value) => phone = value,
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Padding(
                   padding: EdgeInsets.symmetric(horizontal: 15),
                   //padding: EdgeInsets.symmetric(horizontal: 15),
                   child: TextField(
@@ -130,6 +163,7 @@ class _EmailSignUpState extends State<EmailSignUp> {
                         var user = await _auth.createUserWithEmailAndPassword(
                             email: email, password: password);
                         if (user != null) {
+                          await addUserInfo();
                           Navigator.pushReplacementNamed(
                               context, HomeScreen.id);
                         }

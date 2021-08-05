@@ -2,6 +2,8 @@ import 'package:evento/screens/user_screen.dart';
 import 'package:flutter/material.dart';
 
 class TopBar extends StatelessWidget {
+  var loggedInUser;
+  TopBar({this.loggedInUser});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -30,8 +32,7 @@ class TopBar extends StatelessWidget {
               },
               child: CircleAvatar(
                 radius: 27,
-                backgroundImage: NetworkImage(
-                    "https://images.unsplash.com/photo-1604426633861-11b2faead63c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1900&q=80"),
+                backgroundImage: NetworkImage("${loggedInUser.photoURL}"),
               ),
             ),
           ],
