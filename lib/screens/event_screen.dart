@@ -13,16 +13,16 @@ class EventScreen extends StatefulWidget {
 
 class _EventScreenState extends State<EventScreen> {
   int selectedIndex = 0;
-  FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
+  FirebaseFirestore _firebase = FirebaseFirestore.instance;
   Event event = Event();
 
   void shareEvent() {
     Share.share(
-        "I am attending Evento Event ${event.name}! You can also join it Link ${event.link} at ${event.dateTime}");
+        "I am attending Evento Event ${event.name}! You can also join it Link ${event.link} at ${event.dateTime}. Download the app now @Evento");
   }
 
   Future incrementEventAttender() async {
-    var evt = await _firebaseFirestore.collection("events").get();
+    var evt = await _firebase.collection("events").get();
     //var a = evt['noOfUsers'];
   }
 
