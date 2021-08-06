@@ -175,7 +175,6 @@ class _NewEventScreenState extends State<NewEventScreen> {
                         //padding: const EdgeInsets.only(left:15.0,right: 15.0,top:0,bottom: 0),
                         padding: EdgeInsets.symmetric(horizontal: 15),
                         child: TextField(
-                          textAlign: TextAlign.center,
                           // ignore: missing_return
                           decoration: InputDecoration(
                               border: OutlineInputBorder(
@@ -278,6 +277,9 @@ class _NewEventScreenState extends State<NewEventScreen> {
                           if (event.img == null) {
                             event.setImg(
                                 "https://images.unsplash.com/photo-1607835017779-c176b83b2dd8?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=739&q=80");
+                          }
+                          if (event.link == null) {
+                            event.setLink("https://");
                           }
                           await _fbfs
                               .collection("events")

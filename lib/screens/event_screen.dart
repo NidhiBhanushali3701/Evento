@@ -3,7 +3,7 @@ import 'package:evento/obj/event.dart';
 import 'package:evento/screens/home_screen.dart';
 import 'package:evento/screens/user_screen.dart';
 import 'package:flutter/material.dart';
-import "package:share/share.dart";
+import 'package:share/share.dart';
 
 class EventScreen extends StatefulWidget {
   static String id = "EventScreen";
@@ -17,8 +17,9 @@ class _EventScreenState extends State<EventScreen> {
   Event event = Event();
 
   void shareEvent() {
+    Timestamp date = event.dateTime;
     Share.share(
-        "I am attending Evento Event ${event.name}! You can also join it Link ${event.link} at ${event.dateTime}. Download the app now @Evento");
+        "I am attending Evento Event ${event.name}! You can also join it Link ${event.link} at ${date.toDate()}. Download the app now @Evento");
   }
 
   Future incrementEventAttender() async {
