@@ -12,6 +12,7 @@ class UserScreen extends StatefulWidget {
 class _UserScreenState extends State<UserScreen> {
   var loggedInUser;
   var User;
+  var uName, uPhone, uEmail;
   FirebaseAuth _auth = FirebaseAuth.instance;
   FirebaseFirestore _firestore = FirebaseFirestore.instance;
   Future getUserInfo() async {
@@ -19,7 +20,10 @@ class _UserScreenState extends State<UserScreen> {
     var userInfo = await _firestore.collection("users").get();
     for (var u in userInfo.docs) {
       if (u.data()['email'] == loggedInUser.email) {
-        print(u.data()["email"]);
+        uEmail = u.data()["email"];
+        uName = u.data()["name"];
+        uPhone = u.data()["phone"];
+        print("$uName $uPhone $uEmail");
         User = u.data();
         break;
       }
@@ -49,7 +53,13 @@ class _UserScreenState extends State<UserScreen> {
     final Map arguments = ModalRoute.of(context).settings.arguments as Map;
     if (arguments != null) {
       loggedInUser = arguments["loggedInUser"];
-      getUserInfo();
+      uPhone = arguments["uEmail"];
+      uName = arguments["uName"];
+      uEmail = arguments["uPhone"];
+      setState(() {
+        getCurrentUser();
+        getUserInfo();
+      });
     }
     double screenHt = MediaQuery.of(context).size.height,
         screenWd = MediaQuery.of(context).size.width;
@@ -100,7 +110,7 @@ class _UserScreenState extends State<UserScreen> {
                 Container(
                   child: ListTile(
                     leading: Icon(Icons.person),
-                    title: Text("${User['name']}"),
+                    title: Text("$uName"),
                     trailing: IconButton(
                       icon: Icon(Icons.edit),
                       onPressed: () {},
@@ -116,7 +126,7 @@ class _UserScreenState extends State<UserScreen> {
                 Container(
                   child: ListTile(
                     leading: Icon(Icons.phone),
-                    title: Text("${User['phone']}"),
+                    title: Text("$uPhone"),
                     trailing: IconButton(
                       icon: Icon(Icons.edit),
                       onPressed: () {},
@@ -132,7 +142,7 @@ class _UserScreenState extends State<UserScreen> {
                 Container(
                   child: ListTile(
                     leading: Icon(Icons.email),
-                    title: Text("${loggedInUser.email}"),
+                    title: Text("$uEmail"),
                     trailing: IconButton(
                       icon: Icon(Icons.edit),
                       onPressed: () {},

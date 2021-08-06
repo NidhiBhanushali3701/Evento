@@ -110,7 +110,7 @@ class _EventScreenState extends State<EventScreen> {
                     event.setNoOfUsers(event.noOfUsers + 1);
                     Navigator.pop(context, event);
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      content: Text("Event Added Successfully!"),
+                      content: Text("You can attend Event!"),
                     ));
                   },
                 ),

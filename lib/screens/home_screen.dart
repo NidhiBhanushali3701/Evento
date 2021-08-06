@@ -21,6 +21,22 @@ class _HomeScreenState extends State<HomeScreen> {
   FirebaseAuth _auth = FirebaseAuth.instance;
   FirebaseFirestore _firebase = FirebaseFirestore.instance;
 
+  var User;
+  var uName, uPhone, uEmail;
+  Future getUserInfo() async {
+    var userInfo = await _firebase.collection("users").get();
+    for (var u in userInfo.docs) {
+      if (u.data()['email'] == loggedInUser.email) {
+        uEmail = u.data()["email"];
+        uName = u.data()["name"];
+        uPhone = u.data()["phone"];
+        print("$uName $uPhone $uEmail");
+        User = u.data();
+        break;
+      }
+    }
+  }
+
   Future getCurrentUser() async {
     var user = await _auth.currentUser;
     if (user != null) {
@@ -33,6 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     getCurrentUser();
+    getUserInfo();
   }
 
   @override
@@ -49,8 +66,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 TopBar(
                     loggedInUser: loggedInUser,
                     onTap: () {
-                      Navigator.pushNamed(context, UserScreen.id,
-                          arguments: {"loggedInUser": loggedInUser});
+                      Navigator.pushNamed(context, UserScreen.id, arguments: {
+                        "loggedInUser": loggedInUser,
+                        "uEmail": uEmail,
+                        "uPhone": uPhone,
+                        "uName": uName
+                      });
                     }),
                 SizedBox(
                   height: 20,
@@ -171,7 +192,12 @@ class _HomeScreenState extends State<HomeScreen> {
           BottomNavigationBarItem(
             icon: IconButton(
               onPressed: () {
-                Navigator.pushNamed(context, UserScreen.id);
+                Navigator.pushNamed(context, UserScreen.id, arguments: {
+                  "loggedInUser": loggedInUser,
+                  "uEmail": uEmail,
+                  "uPhone": uPhone,
+                  "uName": uName
+                });
               },
               icon: Icon(
                 Icons.person_outline_outlined,
