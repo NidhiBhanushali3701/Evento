@@ -15,7 +15,7 @@ class _EventScreenState extends State<EventScreen> {
   int selectedIndex = 0;
   FirebaseFirestore _firebase = FirebaseFirestore.instance;
   Event event = Event();
-
+  var isFav = false;
   void shareEvent() {
     Timestamp date = event.dateTime;
     Share.share(
@@ -46,24 +46,43 @@ class _EventScreenState extends State<EventScreen> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Expanded(
-                flex: 10,
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(
-                        30,
+              Stack(
+                alignment: AlignmentDirectional.topCenter,
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(
+                          30,
+                        ),
+                      ),
+                    ),
+                    height: screenHt * 0.39,
+                    width: screenWd,
+                    child: Image(
+                      fit: BoxFit.fitWidth,
+                      image: NetworkImage(
+                        "${event.img}",
                       ),
                     ),
                   ),
-                  height: screenHt * 0.35,
-                  child: Image(
-                    fit: BoxFit.fitWidth,
-                    image: NetworkImage(
-                      "${event.img}",
+                  Positioned(
+                    top: 5,
+                    right: 15,
+                    child: FloatingActionButton(
+                      backgroundColor: Colors.white,
+                      onPressed: () {
+                        setState(() {
+                          isFav = !isFav;
+                        });
+                      },
+                      child: Icon(
+                        isFav ? Icons.favorite : Icons.favorite_border,
+                        color:Colors.pink,
+                      ),
                     ),
                   ),
-                ),
+                ],
               ),
               SizedBox(
                 height: screenHt * 0.01,
